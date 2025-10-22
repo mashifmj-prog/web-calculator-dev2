@@ -19,106 +19,47 @@
             min-height: 100vh;
             padding: 20px;
             transition: all 0.3s ease;
-        }
-
-        /* Light Theme */
-        body.light-theme {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-        }
-
-        body.light-theme .calculator {
-            background-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .display {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        body.light-theme .calculation {
-            color: #6c757d;
-        }
-
-        body.light-theme .result {
-            color: #2d3436;
-        }
-
-        body.light-theme .btn-number {
-            background-color: #e9ecef;
-            color: #2d3436;
-        }
-
-        body.light-theme .btn-number:hover {
-            background-color: #dee2e6;
-        }
-
-        body.light-theme .btn-special {
-            background-color: #adb5bd;
-            color: #ffffff;
-        }
-
-        body.light-theme .btn-special:hover {
-            background-color: #6c757d;
-        }
-
-        body.light-theme .btn-memory {
-            background-color: #17a2b8;
-            color: white;
-        }
-
-        body.light-theme .btn-memory:hover {
-            background-color: #138496;
-        }
-
-        body.light-theme .btn-percentage {
-            background-color: #6f42c1;
-            color: white;
-        }
-
-        body.light-theme .btn-percentage:hover {
-            background-color: #5a2d91;
-        }
-
-        body.light-theme .btn-scientific {
-            background-color: #20c997;
-            color: white;
-        }
-
-        body.light-theme .btn-scientific:hover {
-            background-color: #1aa179;
-        }
-
-        body.light-theme .btn-advanced {
-            background-color: #fd7e14;
-            color: white;
-        }
-
-        body.light-theme .btn-advanced:hover {
-            background-color: #e65c00;
-        }
-
-        body.light-theme .btn-conversion {
-            background-color: #e83e8c;
-            color: white;
-        }
-
-        body.light-theme .btn-conversion:hover {
-            background-color: #d91a72;
-        }
-
-        body.light-theme .btn-statistics {
-            background-color: #6f42c1;
-            color: white;
-        }
-
-        body.light-theme .btn-statistics:hover {
-            background-color: #5a2d91;
-        }
-
-        /* Dark Theme (Default) */
-        body.dark-theme {
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+
+        .calculator-container {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .control-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
         
         .calculator {
@@ -126,7 +67,6 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 500px;
             overflow: hidden;
             transition: all 0.3s ease;
         }
@@ -188,110 +128,18 @@
             word-break: break-all;
         }
         
-        .mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 140px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .mode-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .conversion-toggle {
-            position: absolute;
-            top: 80px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .conversion-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .stats-toggle {
-            position: absolute;
-            top: 80px;
-            right: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .stats-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .programmer-toggle {
-            position: absolute;
-            top: 80px;
-            right: 140px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .programmer-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
         .buttons {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            padding: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
         }
         
         .btn {
             border: none;
-            border-radius: 8px;
-            height: 50px;
-            font-size: 16px;
+            border-radius: 12px;
+            height: 60px;
+            font-size: 18px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -389,7 +237,6 @@
         .btn-percentage {
             background-color: #6f42c1;
             color: white;
-            font-size: 14px;
         }
 
         .btn-percentage:hover {
@@ -407,55 +254,10 @@
             background-color: #1aa179;
             transform: translateY(-2px);
         }
-
-        .btn-advanced {
-            background-color: #fd7e14;
-            color: white;
-            font-size: 14px;
-        }
-
-        .btn-advanced:hover {
-            background-color: #e65c00;
-            transform: translateY(-2px);
-        }
-
-        .btn-conversion {
-            background-color: #e83e8c;
-            color: white;
-            font-size: 14px;
-        }
-
-        .btn-conversion:hover {
-            background-color: #d91a72;
-            transform: translateY(-2px);
-        }
-
-        .btn-statistics {
-            background-color: #6f42c1;
-            color: white;
-            font-size: 14px;
-        }
-
-        .btn-statistics:hover {
-            background-color: #5a2d91;
-            transform: translateY(-2px);
-        }
-
-        .btn-programmer {
-            background-color: #ffc107;
-            color: #1e1e2e;
-            font-size: 14px;
-        }
-
-        .btn-programmer:hover {
-            background-color: #e0a800;
-            transform: translateY(-2px);
-        }
         
         .btn-equals {
             background-color: #ff2e63;
             color: #ffffff;
-            grid-column: span 2;
         }
         
         .btn-equals:hover {
@@ -463,79 +265,26 @@
             transform: translateY(-2px);
         }
 
-        /* Theme Toggle Button */
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Sound Toggle Button */
-        .sound-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .sound-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .sound-toggle.muted {
-            opacity: 0.6;
-        }
-
         /* Panels */
-        .history-panel, .conversion-panel, .stats-panel, .programmer-panel {
+        .panel {
             position: absolute;
-            top: 80px;
-            right: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            padding: 15px;
-            width: 300px;
-            max-height: 400px;
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 350px;
+            max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: none;
             backdrop-filter: blur(10px);
             z-index: 1000;
         }
 
-        body.dark-theme .history-panel,
-        body.dark-theme .conversion-panel,
-        body.dark-theme .stats-panel,
-        body.dark-theme .programmer-panel {
+        .dark-theme .panel {
             background: rgba(30, 30, 46, 0.95);
             color: white;
         }
@@ -549,13 +298,13 @@
             border-bottom: 1px solid #ddd;
         }
 
-        body.dark-theme .panel-header {
+        .dark-theme .panel-header {
             border-bottom: 1px solid #444;
         }
 
         .panel-title {
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .close-panel {
@@ -563,28 +312,30 @@
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 5px 10px;
+            padding: 8px 12px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .conversion-options, .stats-options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 10px;
             margin-bottom: 15px;
         }
 
-        .conversion-select, .stats-select {
-            padding: 8px;
-            border-radius: 5px;
+        .conversion-select, .stats-select, .stats-input {
+            padding: 10px;
+            border-radius: 8px;
             border: 1px solid #ddd;
             background: white;
             color: #333;
+            font-size: 14px;
         }
 
-        body.dark-theme .conversion-select,
-        body.dark-theme .stats-select {
+        .dark-theme .conversion-select,
+        .dark-theme .stats-select,
+        .dark-theme .stats-input {
             background: #2d3047;
             color: white;
             border-color: #444;
@@ -592,84 +343,97 @@
 
         .conversion-result, .stats-result {
             background: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
             font-family: monospace;
+            min-height: 60px;
         }
 
-        body.dark-theme .conversion-result,
-        body.dark-theme .stats-result {
+        .dark-theme .conversion-result,
+        .dark-theme .stats-result {
             background: #2d3047;
         }
 
-        .stats-input {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        body.dark-theme .stats-input {
-            background: #2d3047;
-            color: white;
-            border-color: #444;
-        }
-
-        .add-data {
+        .panel-btn {
             background: #20c997;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
+            border-radius: 8px;
+            padding: 12px 20px;
             cursor: pointer;
-            margin: 10px 0;
+            font-size: 14px;
+            width: 100%;
+            margin: 5px 0;
+            transition: all 0.2s ease;
+        }
+
+        .panel-btn:hover {
+            background: #1aa179;
+            transform: translateY(-2px);
+        }
+
+        .panel-btn.clear {
+            background: #ff6b6b;
+        }
+
+        .panel-btn.clear:hover {
+            background: #e55a5a;
         }
 
         .data-set {
-            margin: 10px 0;
-            padding: 10px;
+            margin: 15px 0;
+            padding: 15px;
             background: #f8f9fa;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 14px;
         }
 
-        body.dark-theme .data-set {
+        .dark-theme .data-set {
+            background: #2d3047;
+        }
+
+        .base-display {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .dark-theme .base-display {
             background: #2d3047;
         }
 
         .programmer-buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-            margin: 10px 0;
+            gap: 8px;
+            margin: 15px 0;
         }
 
-        .base-display {
-            font-family: monospace;
-            background: #f8f9fa;
+        .programmer-btn {
+            background: #ffc107;
+            color: #1e1e2e;
+            border: none;
+            border-radius: 6px;
             padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0;
-            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
         }
 
-        body.dark-theme .base-display {
-            background: #2d3047;
+        .programmer-btn:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
         }
 
         .github-link {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        body.light-theme .github-link {
-            color: #2d3436;
-        }
-
-        body.dark-theme .github-link {
             color: #ffffff;
         }
         
@@ -698,45 +462,61 @@
             display: none;
         }
 
-        .scientific-mode .scientific-buttons {
-            display: grid;
-        }
-
         .scientific-mode .basic-buttons {
             display: none;
         }
 
-        .conversion-mode .conversion-buttons {
+        .scientific-mode .scientific-buttons {
             display: grid;
         }
 
-        .conversion-mode .basic-buttons {
+        /* Overlay for panels */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
             display: none;
+            z-index: 999;
         }
 
-        .stats-mode .stats-buttons {
-            display: grid;
-        }
-
-        .stats-mode .basic-buttons {
-            display: none;
-        }
-
-        .programmer-mode .programmer-buttons-main {
-            display: grid;
-        }
-
-        .programmer-mode .basic-buttons {
-            display: none;
-        }
-        
-        @media (max-width: 550px) {
-            .calculator {
+        @media (max-width: 480px) {
+            .calculator-container {
                 max-width: 100%;
             }
             
             .buttons {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+                padding: 15px;
+            }
+            
+            .btn {
+                height: 50px;
+                font-size: 16px;
+            }
+            
+            .result {
+                font-size: 32px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .panel {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .buttons {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 6px;
                 padding: 10px;
             }
@@ -745,249 +525,164 @@
                 height: 45px;
                 font-size: 14px;
             }
-            
-            .result {
-                font-size: 32px;
-            }
-
-            .theme-toggle, .sound-toggle, .history-toggle, .mode-toggle,
-            .conversion-toggle, .stats-toggle, .programmer-toggle {
-                top: 10px;
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-            
-            .theme-toggle { right: 10px; }
-            .sound-toggle { left: 10px; }
-            .history-toggle { right: 60px; }
-            .mode-toggle { right: 110px; }
-            .conversion-toggle { top: 60px; right: 10px; }
-            .stats-toggle { top: 60px; right: 60px; }
-            .programmer-toggle { top: 60px; right: 110px; }
-
-            .history-panel, .conversion-panel, .stats-panel, .programmer-panel {
-                width: 250px;
-                right: 10px;
-            }
-
-            .display {
-                min-height: 100px;
-                padding: 15px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .buttons {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .btn {
-                height: 40px;
-                font-size: 12px;
-            }
         }
     </style>
 </head>
 <body class="dark-theme">
-    <!-- Control Buttons -->
-    <button class="sound-toggle" onclick="toggleSound()" title="Toggle Sound">🔊</button>
-    <button class="history-toggle" onclick="togglePanel('historyPanel')" title="Calculation History">📜</button>
-    <button class="mode-toggle" onclick="toggleMode('scientific')" title="Scientific Mode">🔬</button>
-    <button class="conversion-toggle" onclick="toggleMode('conversion')" title="Unit Conversion">📐</button>
-    <button class="stats-toggle" onclick="toggleMode('stats')" title="Statistics">📊</button>
-    <button class="programmer-toggle" onclick="toggleMode('programmer')" title="Programmer Mode">💻</button>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">🌙</button>
-    
-    <!-- Panels -->
-    <div class="history-panel" id="historyPanel">
-        <div class="panel-header">
-            <div class="panel-title">Calculation History</div>
-            <button class="close-panel" onclick="closePanel('historyPanel')">✕</button>
-        </div>
-        <div id="historyList"></div>
-    </div>
-
-    <div class="conversion-panel" id="conversionPanel">
-        <div class="panel-header">
-            <div class="panel-title">Unit Converter</div>
-            <button class="close-panel" onclick="closePanel('conversionPanel')">✕</button>
-        </div>
-        <div class="conversion-options">
-            <select class="conversion-select" id="conversionCategory" onchange="updateConversionUnits()">
-                <option value="length">Length</option>
-                <option value="weight">Weight</option>
-                <option value="temperature">Temperature</option>
-                <option value="area">Area</option>
-                <option value="volume">Volume</option>
-            </select>
-            <select class="conversion-select" id="conversionFrom">
-                <option value="meter">Meters</option>
-                <option value="kilometer">Kilometers</option>
-                <option value="centimeter">Centimeters</option>
-            </select>
-            <select class="conversion-select" id="conversionTo">
-                <option value="foot">Feet</option>
-                <option value="mile">Miles</option>
-                <option value="inch">Inches</option>
-            </select>
-        </div>
-        <div class="conversion-result" id="conversionResult">
-            Enter value and click Convert
-        </div>
-        <button class="add-data" onclick="performConversion()">Convert</button>
-    </div>
-
-    <div class="stats-panel" id="statsPanel">
-        <div class="panel-header">
-            <div class="panel-title">Statistics Calculator</div>
-            <button class="close-panel" onclick="closePanel('statsPanel')">✕</button>
-        </div>
-        <input type="number" class="stats-input" id="statsInput" placeholder="Enter a number">
-        <button class="add-data" onclick="addToDataSet()">Add to Data Set</button>
-        <div class="data-set" id="dataSetDisplay">Data set: empty</div>
-        <button class="add-data" onclick="calculateStatistics()">Calculate Statistics</button>
-        <div class="stats-result" id="statsResult">Results will appear here</div>
-        <button class="add-data" style="background: #ff6b6b;" onclick="clearDataSet()">Clear Data</button>
-    </div>
-
-    <div class="programmer-panel" id="programmerPanel">
-        <div class="panel-header">
-            <div class="panel-title">Programmer Mode</div>
-            <button class="close-panel" onclick="closePanel('programmerPanel')">✕</button>
-        </div>
-        <div class="base-display">
-            <div>DEC: <span id="decValue">0</span></div>
-            <div>HEX: <span id="hexValue">0</span></div>
-            <div>BIN: <span id="binValue">0</span></div>
-            <div>OCT: <span id="octValue">0</span></div>
-        </div>
-        <div class="programmer-buttons">
-            <button class="btn btn-programmer" onclick="programmerAction('and')">AND</button>
-            <button class="btn btn-programmer" onclick="programmerAction('or')">OR</button>
-            <button class="btn btn-programmer" onclick="programmerAction('xor')">XOR</button>
-            <button class="btn btn-programmer" onclick="programmerAction('not')">NOT</button>
-            <button class="btn btn-programmer" onclick="programmerAction('shiftl')"><<</button>
-            <button class="btn btn-programmer" onclick="programmerAction('shiftr')">>></button>
-            <button class="btn btn-programmer" onclick="programmerAction('mod')">MOD</button>
-            <button class="btn btn-programmer" onclick="setBase(16)">HEX</button>
-            <button class="btn btn-programmer" onclick="setBase(10)">DEC</button>
-            <button class="btn btn-programmer" onclick="setBase(8)">OCT</button>
-            <button class="btn btn-programmer" onclick="setBase(2)">BIN</button>
-        </div>
-    </div>
-    
-    <div class="calculator">
-        <div class="display">
-            <div class="memory-indicator" id="memoryIndicator"></div>
-            <div class="scientific-indicator" id="scientificIndicator"></div>
-            <div class="mode-indicator" id="modeIndicator">BASIC</div>
-            <div class="calculation" id="calculation"></div>
-            <div class="result" id="result">0</div>
+    <div class="calculator-container">
+        <!-- Control Buttons -->
+        <div class="control-buttons">
+            <button class="control-btn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+            <button class="control-btn" onclick="togglePanel('historyPanel')" title="Calculation History">📜</button>
+            <button class="control-btn" onclick="toggleMode('scientific')" title="Scientific Mode">🔬</button>
+            <button class="control-btn" onclick="togglePanel('conversionPanel')" title="Unit Conversion">📐</button>
+            <button class="control-btn" onclick="togglePanel('statsPanel')" title="Statistics">📊</button>
+            <button class="control-btn" onclick="togglePanel('programmerPanel')" title="Programmer Mode">💻</button>
+            <button class="control-btn" onclick="toggleTheme()" title="Toggle Theme">🌙</button>
         </div>
         
-        <div class="buttons">
-            <!-- Scientific Functions -->
-            <div class="scientific-buttons">
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'sin')">sin</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'cos')">cos</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'tan')">tan</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'log')">log</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'ln')">ln</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'sqrt')">√</button>
-                
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'asin')">sin⁻¹</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'acos')">cos⁻¹</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'atan')">tan⁻¹</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'log10')">log₁₀</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'exp')">eˣ</button>
-                <button class="btn btn-scientific" onclick="buttonClick('scientific', 'pow')">xʸ</button>
-                
-                <button class="btn btn-advanced" onclick="buttonClick('scientific', 'pi')">π</button>
-                <button class="btn btn-advanced" onclick="buttonClick('scientific', 'e')">e</button>
-                <button class="btn btn-advanced" onclick="buttonClick('scientific', 'fact')">x!</button>
-                <button class="btn btn-advanced" onclick="buttonClick('scientific', 'pow2')">x²</button>
-                <button class="btn btn-advanced" onclick="buttonClick('scientific', 'pow3')">x³</button>
-                <button class="btn btn-advanced" onclick="buttonClick('scientific', 'inv')">1/x</button>
+        <!-- Calculator -->
+        <div class="calculator" id="calculator">
+            <div class="display">
+                <div class="memory-indicator" id="memoryIndicator"></div>
+                <div class="scientific-indicator" id="scientificIndicator"></div>
+                <div class="mode-indicator" id="modeIndicator">BASIC</div>
+                <div class="calculation" id="calculation"></div>
+                <div class="result" id="result">0</div>
             </div>
+            
+            <div class="buttons">
+                <!-- Scientific Functions -->
+                <div class="scientific-buttons">
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'sin')">sin</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'cos')">cos</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'tan')">tan</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'log')">log</button>
+                    
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'asin')">sin⁻¹</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'acos')">cos⁻¹</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'atan')">tan⁻¹</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'log10')">log₁₀</button>
+                    
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'sqrt')">√</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'exp')">eˣ</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'pow')">xʸ</button>
+                    <button class="btn btn-scientific" onclick="toggleAngleMode()" id="angleBtn">DEG</button>
+                    
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'pi')">π</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'e')">e</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'fact')">x!</button>
+                    <button class="btn btn-scientific" onclick="buttonClick('scientific', 'pow2')">x²</button>
+                </div>
 
-            <!-- Conversion Functions -->
-            <div class="conversion-buttons">
-                <button class="btn btn-conversion" onclick="openPanel('conversionPanel')">Length</button>
-                <button class="btn btn-conversion" onclick="openPanel('conversionPanel')">Weight</button>
-                <button class="btn btn-conversion" onclick="openPanel('conversionPanel')">Temp</button>
-                <button class="btn btn-conversion" onclick="openPanel('conversionPanel')">Area</button>
-                <button class="btn btn-conversion" onclick="openPanel('conversionPanel')">Volume</button>
-                <button class="btn btn-conversion" onclick="openPanel('conversionPanel')">Time</button>
-            </div>
-
-            <!-- Statistics Functions -->
-            <div class="stats-buttons">
-                <button class="btn btn-statistics" onclick="openPanel('statsPanel')">Mean</button>
-                <button class="btn btn-statistics" onclick="openPanel('statsPanel')">Median</button>
-                <button class="btn btn-statistics" onclick="openPanel('statsPanel')">Mode</button>
-                <button class="btn btn-statistics" onclick="openPanel('statsPanel')">Std Dev</button>
-                <button class="btn btn-statistics" onclick="openPanel('statsPanel')">Variance</button>
-                <button class="btn btn-statistics" onclick="openPanel('statsPanel')">Clear Data</button>
-            </div>
-
-            <!-- Programmer Functions -->
-            <div class="programmer-buttons-main">
-                <button class="btn btn-programmer" onclick="programmerInput('A')">A</button>
-                <button class="btn btn-programmer" onclick="programmerInput('B')">B</button>
-                <button class="btn btn-programmer" onclick="programmerInput('C')">C</button>
-                <button class="btn btn-programmer" onclick="programmerInput('D')">D</button>
-                <button class="btn btn-programmer" onclick="programmerInput('E')">E</button>
-                <button class="btn btn-programmer" onclick="programmerInput('F')">F</button>
-                
-                <button class="btn btn-programmer" onclick="programmerAction('and')">AND</button>
-                <button class="btn btn-programmer" onclick="programmerAction('or')">OR</button>
-                <button class="btn btn-programmer" onclick="programmerAction('xor')">XOR</button>
-                <button class="btn btn-programmer" onclick="programmerAction('not')">NOT</button>
-                <button class="btn btn-programmer" onclick="programmerAction('shiftl')"><<</button>
-                <button class="btn btn-programmer" onclick="programmerAction('shiftr')">>></button>
-            </div>
-
-            <!-- Basic Calculator Buttons -->
-            <div class="basic-buttons">
-                <!-- Memory Functions Row -->
-                <button class="btn btn-memory" onclick="buttonClick('memory', 'mc')" title="Memory Clear">MC</button>
-                <button class="btn btn-memory" onclick="buttonClick('memory', 'mr')" title="Memory Recall">MR</button>
-                <button class="btn btn-memory" onclick="buttonClick('memory', 'm+')" title="Memory Add">M+</button>
-                <button class="btn btn-memory" onclick="buttonClick('memory', 'm-')" title="Memory Subtract">M-</button>
-                <button class="btn btn-percentage" onclick="buttonClick('percentage')" title="Percentage">%</button>
-                <button class="btn btn-special" onclick="buttonClick('clear')">C</button>
-                
-                <!-- Main Calculator Buttons -->
-                <button class="btn btn-special" onclick="buttonClick('delete')">⌫</button>
-                <button class="btn btn-special" onclick="buttonClick('operator', '/')">/</button>
-                <button class="btn btn-operator" onclick="buttonClick('operator', '*')">×</button>
-                <button class="btn btn-operator" onclick="buttonClick('operator', '-')">-</button>
-                <button class="btn btn-operator" onclick="buttonClick('operator', '+')">+</button>
-                
-                <button class="btn btn-number" onclick="buttonClick('number', '7')">7</button>
-                <button class="btn btn-number" onclick="buttonClick('number', '8')">8</button>
-                <button class="btn btn-number" onclick="buttonClick('number', '9')">9</button>
-                
-                <button class="btn btn-number" onclick="buttonClick('number', '4')">4</button>
-                <button class="btn btn-number" onclick="buttonClick('number', '5')">5</button>
-                <button class="btn btn-number" onclick="buttonClick('number', '6')">6</button>
-                
-                <button class="btn btn-number" onclick="buttonClick('number', '1')">1</button>
-                <button class="btn btn-number" onclick="buttonClick('number', '2')">2</button>
-                <button class="btn btn-number" onclick="buttonClick('number', '3')">3</button>
-                
-                <button class="btn btn-number" onclick="buttonClick('number', '0')">0</button>
-                <button class="btn btn-number" onclick="buttonClick('decimal')">.</button>
-                <button class="btn btn-equals" onclick="buttonClick('equals')">=</button>
+                <!-- Basic Calculator Buttons -->
+                <div class="basic-buttons">
+                    <button class="btn btn-memory" onclick="buttonClick('memory', 'mc')">MC</button>
+                    <button class="btn btn-memory" onclick="buttonClick('memory', 'mr')">MR</button>
+                    <button class="btn btn-memory" onclick="buttonClick('memory', 'm+')">M+</button>
+                    <button class="btn btn-memory" onclick="buttonClick('memory', 'm-')">M-</button>
+                    
+                    <button class="btn btn-special" onclick="buttonClick('clear')">C</button>
+                    <button class="btn btn-special" onclick="buttonClick('delete')">⌫</button>
+                    <button class="btn btn-special" onclick="buttonClick('operator', '/')">/</button>
+                    <button class="btn btn-operator" onclick="buttonClick('operator', '*')">×</button>
+                    
+                    <button class="btn btn-number" onclick="buttonClick('number', '7')">7</button>
+                    <button class="btn btn-number" onclick="buttonClick('number', '8')">8</button>
+                    <button class="btn btn-number" onclick="buttonClick('number', '9')">9</button>
+                    <button class="btn btn-operator" onclick="buttonClick('operator', '-')">-</button>
+                    
+                    <button class="btn btn-number" onclick="buttonClick('number', '4')">4</button>
+                    <button class="btn btn-number" onclick="buttonClick('number', '5')">5</button>
+                    <button class="btn btn-number" onclick="buttonClick('number', '6')">6</button>
+                    <button class="btn btn-operator" onclick="buttonClick('operator', '+')">+</button>
+                    
+                    <button class="btn btn-number" onclick="buttonClick('number', '1')">1</button>
+                    <button class="btn btn-number" onclick="buttonClick('number', '2')">2</button>
+                    <button class="btn btn-number" onclick="buttonClick('number', '3')">3</button>
+                    <button class="btn btn-equals" onclick="buttonClick('equals')" rowspan="2">=</button>
+                    
+                    <button class="btn btn-number" onclick="buttonClick('number', '0')">0</button>
+                    <button class="btn btn-number" onclick="buttonClick('decimal')">.</button>
+                    <button class="btn btn-percentage" onclick="buttonClick('percentage')">%</button>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="github-link">
-        Hosted on <a href="https://github.com" target="_blank">GitHub</a> | 
-        Sound: <span id="sound-status">ON</span> | 
-        Mode: <span id="mode-status">Basic</span>
+
+        <!-- Panels -->
+        <div class="overlay" id="overlay" onclick="closeAllPanels()"></div>
+
+        <div class="panel" id="historyPanel">
+            <div class="panel-header">
+                <div class="panel-title">Calculation History</div>
+                <button class="close-panel" onclick="closePanel('historyPanel')">✕</button>
+            </div>
+            <div id="historyList"></div>
+            <button class="panel-btn clear" onclick="clearHistory()">Clear History</button>
+        </div>
+
+        <div class="panel" id="conversionPanel">
+            <div class="panel-header">
+                <div class="panel-title">Unit Converter</div>
+                <button class="close-panel" onclick="closePanel('conversionPanel')">✕</button>
+            </div>
+            <div class="conversion-options">
+                <select class="conversion-select" id="conversionCategory" onchange="updateConversionUnits()">
+                    <option value="length">Length</option>
+                    <option value="weight">Weight</option>
+                    <option value="temperature">Temperature</option>
+                    <option value="area">Area</option>
+                    <option value="volume">Volume</option>
+                </select>
+                <select class="conversion-select" id="conversionFrom"></select>
+                <select class="conversion-select" id="conversionTo"></select>
+            </div>
+            <div class="conversion-result" id="conversionResult">
+                Enter value in calculator and click Convert
+            </div>
+            <button class="panel-btn" onclick="performConversion()">Convert</button>
+        </div>
+
+        <div class="panel" id="statsPanel">
+            <div class="panel-header">
+                <div class="panel-title">Statistics Calculator</div>
+                <button class="close-panel" onclick="closePanel('statsPanel')">✕</button>
+            </div>
+            <input type="number" class="stats-input" id="statsInput" placeholder="Enter a number">
+            <button class="panel-btn" onclick="addToDataSet()">Add to Data Set</button>
+            <div class="data-set" id="dataSetDisplay">Data set: empty</div>
+            <button class="panel-btn" onclick="calculateStatistics()">Calculate Statistics</button>
+            <div class="stats-result" id="statsResult">Results will appear here</div>
+            <button class="panel-btn clear" onclick="clearDataSet()">Clear Data</button>
+        </div>
+
+        <div class="panel" id="programmerPanel">
+            <div class="panel-header">
+                <div class="panel-title">Programmer Mode</div>
+                <button class="close-panel" onclick="closePanel('programmerPanel')">✕</button>
+            </div>
+            <div class="base-display">
+                <div>DEC: <span id="decValue">0</span></div>
+                <div>HEX: <span id="hexValue">0</span></div>
+                <div>BIN: <span id="binValue">0</span></div>
+                <div>OCT: <span id="octValue">0</span></div>
+            </div>
+            <div class="programmer-buttons">
+                <button class="programmer-btn" onclick="setBase(16)">HEX</button>
+                <button class="programmer-btn" onclick="setBase(10)">DEC</button>
+                <button class="programmer-btn" onclick="setBase(8)">OCT</button>
+                <button class="programmer-btn" onclick="setBase(2)">BIN</button>
+                <button class="programmer-btn" onclick="programmerAction('and')">AND</button>
+                <button class="programmer-btn" onclick="programmerAction('or')">OR</button>
+                <button class="programmer-btn" onclick="programmerAction('xor')">XOR</button>
+                <button class="programmer-btn" onclick="programmerAction('not')">NOT</button>
+            </div>
+            <button class="panel-btn" onclick="loadCurrentValue()">Use Current Value</button>
+        </div>
+        
+        <div class="github-link">
+            Hosted on <a href="https://github.com" target="_blank">GitHub</a>
+        </div>
     </div>
 
     <script>
@@ -1009,13 +704,14 @@
         // DOM elements
         const resultElement = document.getElementById('result');
         const calculationElement = document.getElementById('calculation');
-        const soundStatusElement = document.getElementById('sound-status');
         const memoryIndicator = document.getElementById('memoryIndicator');
         const scientificIndicator = document.getElementById('scientificIndicator');
         const modeIndicator = document.getElementById('modeIndicator');
-        const modeStatusElement = document.getElementById('mode-status');
-        const historyPanel = document.getElementById('historyPanel');
         const historyList = document.getElementById('historyList');
+        const angleBtn = document.getElementById('angleBtn');
+
+        // Initialize conversion units
+        updateConversionUnits();
 
         // Sound functions
         function playSound(frequency, duration, type = 'sine') {
@@ -1053,49 +749,37 @@
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
-            const soundToggle = document.querySelector('.sound-toggle');
-            soundStatusElement.textContent = soundEnabled ? 'ON' : 'OFF';
-            
+            const soundBtn = document.querySelector('.control-btn:nth-child(1)');
             if (soundEnabled) {
-                soundToggle.classList.remove('muted');
-                soundToggle.textContent = '🔊';
+                soundBtn.textContent = '🔊';
                 playSpecialSound();
             } else {
-                soundToggle.classList.add('muted');
-                soundToggle.textContent = '🔇';
+                soundBtn.textContent = '🔇';
             }
         }
 
         // Mode management
         function toggleMode(mode) {
-            const calculator = document.querySelector('.calculator');
+            const calculator = document.getElementById('calculator');
+            const modeBtn = document.querySelector('.control-btn:nth-child(3)');
             
-            // Remove all mode classes
-            calculator.classList.remove('scientific-mode', 'conversion-mode', 'stats-mode', 'programmer-mode');
-            
-            if (currentMode === mode) {
+            if (currentMode === 'scientific') {
                 // Switch back to basic mode
                 currentMode = 'basic';
+                calculator.classList.remove('scientific-mode');
                 modeIndicator.textContent = 'BASIC';
-                modeStatusElement.textContent = 'Basic';
+                scientificIndicator.textContent = '';
+                modeBtn.classList.remove('active');
                 playSpecialSound();
             } else {
-                // Switch to new mode
-                currentMode = mode;
-                calculator.classList.add(mode + '-mode');
-                modeIndicator.textContent = mode.toUpperCase();
-                modeStatusElement.textContent = mode.charAt(0).toUpperCase() + mode.slice(1);
+                // Switch to scientific mode
+                currentMode = 'scientific';
+                calculator.classList.add('scientific-mode');
+                modeIndicator.textContent = 'SCIENTIFIC';
+                scientificIndicator.textContent = degreeMode ? 'DEG' : 'RAD';
+                angleBtn.textContent = degreeMode ? 'DEG' : 'RAD';
+                modeBtn.classList.add('active');
                 playScientificSound();
-                
-                if (mode === 'scientific') {
-                    scientificIndicator.textContent = degreeMode ? 'DEG' : 'RAD';
-                } else {
-                    scientificIndicator.textContent = '';
-                }
-                
-                if (mode === 'programmer') {
-                    updateProgrammerDisplay();
-                }
             }
         }
 
@@ -1103,24 +787,23 @@
             if (currentMode === 'scientific') {
                 degreeMode = !degreeMode;
                 scientificIndicator.textContent = degreeMode ? 'DEG' : 'RAD';
+                angleBtn.textContent = degreeMode ? 'DEG' : 'RAD';
                 playSpecialSound();
             }
         }
 
         // Panel management
-        function openPanel(panelId) {
-            closeAllPanels();
-            document.getElementById(panelId).style.display = 'block';
-            playSpecialSound();
-        }
-
         function togglePanel(panelId) {
             const panel = document.getElementById(panelId);
+            const overlay = document.getElementById('overlay');
+            
             if (panel.style.display === 'block') {
                 panel.style.display = 'none';
+                overlay.style.display = 'none';
             } else {
                 closeAllPanels();
                 panel.style.display = 'block';
+                overlay.style.display = 'block';
                 if (panelId === 'historyPanel') updateHistoryDisplay();
                 if (panelId === 'programmerPanel') updateProgrammerDisplay();
             }
@@ -1129,11 +812,13 @@
 
         function closePanel(panelId) {
             document.getElementById(panelId).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
         }
 
         function closeAllPanels() {
-            const panels = document.querySelectorAll('.history-panel, .conversion-panel, .stats-panel, .programmer-panel');
+            const panels = document.querySelectorAll('.panel');
             panels.forEach(panel => panel.style.display = 'none');
+            document.getElementById('overlay').style.display = 'none';
         }
 
         // Unit Conversion Functions
@@ -1172,7 +857,6 @@
                 toSelect.add(option2);
             });
             
-            // Set different default selections
             if (units.length > 1) {
                 toSelect.selectedIndex = 1;
             }
@@ -1200,7 +884,6 @@
         }
 
         function convertUnit(value, fromUnit, toUnit, category) {
-            // Conversion factors (simplified)
             const conversions = {
                 length: {
                     meter: 1,
@@ -1286,7 +969,6 @@
                 ? (sorted[sorted.length/2 - 1] + sorted[sorted.length/2]) / 2
                 : sorted[Math.floor(sorted.length/2)];
             
-            // Mode calculation
             const frequency = {};
             let maxFreq = 0;
             let modes = [];
@@ -1302,8 +984,6 @@
             });
             
             const mode = modes.length === dataSet.length ? 'No mode' : modes.join(', ');
-            
-            // Standard deviation
             const variance = dataSet.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / dataSet.length;
             const stdDev = Math.sqrt(variance);
             
@@ -1335,16 +1015,17 @@
             document.getElementById('octValue').textContent = programmerValue.toString(8);
         }
 
-        function programmerInput(value) {
-            if (currentBase === 16) {
-                currentInput += value;
+        function loadCurrentValue() {
+            const value = parseFloat(currentInput);
+            if (!isNaN(value)) {
+                programmerValue = value;
+                updateProgrammerDisplay();
+                playSpecialSound();
             }
-            // Handle other bases as needed
-            updateDisplay();
         }
 
         function programmerAction(action) {
-            const current = parseInt(currentInput, currentBase) || 0;
+            const current = parseInt(currentInput) || 0;
             
             switch(action) {
                 case 'and':
@@ -1359,19 +1040,11 @@
                 case 'not':
                     programmerValue = ~current;
                     break;
-                case 'shiftl':
-                    programmerValue = programmerValue << current;
-                    break;
-                case 'shiftr':
-                    programmerValue = programmerValue >> current;
-                    break;
-                case 'mod':
-                    programmerValue = programmerValue % current;
-                    break;
             }
             
             currentInput = '0';
             updateProgrammerDisplay();
+            updateDisplay();
             playSpecialSound();
         }
 
@@ -1384,7 +1057,7 @@
             playSpecialSound();
         }
 
-        // Existing calculator functions (shortened for brevity)
+        // Memory functions
         function updateMemoryIndicator() {
             memoryIndicator.textContent = memory !== 0 ? 'M' : '';
         }
@@ -1415,7 +1088,6 @@
                     case 'acos': result = degreeMode ? Math.acos(current) * 180 / Math.PI : Math.acos(current); break;
                     case 'atan': result = degreeMode ? Math.atan(current) * 180 / Math.PI : Math.atan(current); break;
                     case 'log': result = Math.log(current); break;
-                    case 'ln': result = Math.log(current); break;
                     case 'log10': result = Math.log10(current); break;
                     case 'sqrt': result = Math.sqrt(current); break;
                     case 'exp': result = Math.exp(current); break;
@@ -1424,8 +1096,6 @@
                     case 'e': result = Math.E; break;
                     case 'fact': result = factorial(current); break;
                     case 'pow2': result = Math.pow(current, 2); break;
-                    case 'pow3': result = Math.pow(current, 3); break;
-                    case 'inv': result = 1 / current; break;
                     default: return;
                 }
                 
@@ -1602,16 +1272,14 @@
         function toggleTheme() {
             playSpecialSound();
             const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
+            const themeBtn = document.querySelector('.control-btn:nth-child(7)');
             if (isDarkTheme) {
                 body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-                themeToggle.textContent = '☀️';
+                themeBtn.textContent = '☀️';
                 isDarkTheme = false;
             } else {
-                body.classList.remove('light-theme');
                 body.classList.add('dark-theme');
-                themeToggle.textContent = '🌙';
+                themeBtn.textContent = '🌙';
                 isDarkTheme = true;
             }
         }
@@ -1630,20 +1298,12 @@
             else if (key === 's' || key === 'S') { event.preventDefault(); toggleSound(); }
             else if (key === 'h' || key === 'H') { event.preventDefault(); togglePanel('historyPanel'); }
             else if (key === '%') { event.preventDefault(); buttonClick('percentage'); }
-            else if (key === 'm' || key === 'M') {
-                if (!event.ctrlKey) { event.preventDefault(); toggleMode('scientific'); }
-                else { event.preventDefault(); buttonClick('memory', event.shiftKey ? 'm-' : 'm+'); }
-            }
-            else if (key === 'u' || key === 'U') { event.preventDefault(); toggleMode('conversion'); }
-            else if (key === 'd' || key === 'D') { 
-                if (currentMode === 'scientific') { event.preventDefault(); toggleAngleMode(); }
-            }
+            else if (key === 'm' || key === 'M') { event.preventDefault(); toggleMode('scientific'); }
         });
 
         // Initialize
         updateDisplay();
         updateMemoryIndicator();
-        updateConversionUnits();
     </script>
 </body>
 </html>
