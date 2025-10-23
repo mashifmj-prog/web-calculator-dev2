@@ -1,40 +1,1042 @@
-.github-link {
-    position: fixed;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 12px;
-    transition: all 0.3s ease;
-    z-index: 100;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
 
-body.light-theme .github-link {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.9);
-    color: #2d3436;
-}
+        /* Light Theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
 
-body.dark-theme .github-link {
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.7);
-}
+        body.light-theme .calculator {
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
 
-.github-link a {
-    color: #ffcc00;
-    text-decoration: none;
-}
+        body.light-theme .display {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
 
-.github-link a:hover {
-    text-decoration: underline;
-}
+        body.light-theme .calculation {
+            color: #6c757d;
+        }
 
-@media (max-width: 450px) {
-    .github-link {
-        font-size: 11px;
-        bottom: 5px;
-    }
-}
+        body.light-theme .result {
+            color: #2d3436;
+        }
+
+        body.light-theme .btn-number {
+            background-color: #e9ecef;
+            color: #2d3436;
+        }
+
+        body.light-theme .btn-number:hover {
+            background-color: #dee2e6;
+        }
+
+        body.light-theme .btn-special {
+            background-color: #adb5bd;
+            color: #ffffff;
+        }
+
+        body.light-theme .btn-special:hover {
+            background-color: #6c757d;
+        }
+
+        body.light-theme .btn-memory {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        body.light-theme .btn-memory:hover {
+            background-color: #138496;
+        }
+
+        body.light-theme .btn-percentage {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+        body.light-theme .btn-percentage:hover {
+            background-color: #5a2d91;
+        }
+
+        /* Dark Theme (Default) */
+        body.dark-theme {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+        
+        .calculator {
+            background-color: #1e1e2e;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .display {
+            padding: 20px;
+            background-color: #2d3047;
+            text-align: right;
+            border-bottom: 1px solid #3a3e5b;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .memory-indicator {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 14px;
+            color: #ff9500;
+            font-weight: bold;
+        }
+        
+        .calculation {
+            color: #a9b1d6;
+            font-size: 16px;
+            min-height: 24px;
+            margin-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+        }
+        
+        .result {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 300;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+        
+        .btn {
+            border: none;
+            border-radius: 10px;
+            height: 60px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Button Animation Effects */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+        
+        .btn:active::after {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .btn:active {
+            transform: scale(0.92);
+        }
+        
+        .btn-press {
+            animation: buttonPress 0.15s ease;
+        }
+        
+        @keyframes buttonPress {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.92); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn-glow {
+            animation: buttonGlow 0.3s ease;
+        }
+        
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 0px rgba(255, 255, 255, 0.4); }
+            50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); }
+            100% { box-shadow: 0 0 0px rgba(255, 255, 255, 0.4); }
+        }
+        
+        .btn-number {
+            background-color: #2f334d;
+            color: #ffffff;
+        }
+        
+        .btn-number:hover {
+            background-color: #3a3e5b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-operator {
+            background-color: #ff9500;
+            color: #ffffff;
+        }
+        
+        .btn-operator:hover {
+            background-color: #ffaa33;
+            transform: translateY(-2px);
+        }
+        
+        .btn-special {
+            background-color: #a9b1d6;
+            color: #1e1e2e;
+        }
+        
+        .btn-special:hover {
+            background-color: #c0c8e8;
+            transform: translateY(-2px);
+        }
+
+        .btn-memory {
+            background-color: #17a2b8;
+            color: white;
+            font-size: 16px;
+        }
+
+        .btn-memory:hover {
+            background-color: #138496;
+            transform: translateY(-2px);
+        }
+
+        .btn-percentage {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+        .btn-percentage:hover {
+            background-color: #5a2d91;
+            transform: translateY(-2px);
+        }
+        
+        .btn-equals {
+            background-color: #ff2e63;
+            color: #ffffff;
+            grid-column: span 2;
+        }
+        
+        .btn-equals:hover {
+            background-color: #ff5c85;
+            transform: translateY(-2px);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sound Badge */
+        .sound-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .sound-badge:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .sound-badge.muted {
+            opacity: 0.6;
+        }
+
+        /* GitHub Badge */
+        .github-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .github-badge:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* History Panel */
+        .history-panel {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            backdrop-filter: blur(10px);
+            z-index: 20;
+        }
+
+        body.dark-theme .history-panel {
+            background: rgba(30, 30, 46, 0.95);
+            color: white;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        body.dark-theme .history-header {
+            border-bottom: 1px solid #444;
+        }
+
+        .history-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .clear-history {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .history-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        body.dark-theme .history-item {
+            border-bottom: 1px solid #444;
+        }
+
+        .history-item:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .history-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .history-expression {
+            font-size: 14px;
+            color: #666;
+        }
+
+        body.dark-theme .history-expression {
+            color: #ccc;
+        }
+
+        .history-result {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff9500;
+        }
+
+        .history-toggle {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .history-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+
+        .sound-badge:hover .tooltip,
+        .github-badge:hover .tooltip,
+        .theme-toggle:hover .tooltip,
+        .history-toggle:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* Display Animation */
+        .display-update {
+            animation: displayPulse 0.2s ease;
+        }
+
+        @keyframes displayPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 450px) {
+            .calculator {
+                max-width: 100%;
+            }
+            
+            .buttons {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+                padding: 10px;
+            }
+            
+            .btn {
+                height: 50px;
+                font-size: 16px;
+            }
+            
+            .result {
+                font-size: 32px;
+            }
+
+            .theme-toggle, .sound-badge, .history-toggle, .github-badge {
+                top: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .theme-toggle {
+                right: 10px;
+            }
+            
+            .sound-badge {
+                left: 10px;
+            }
+
+            .history-toggle {
+                right: 60px;
+            }
+
+            .github-badge {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .history-panel {
+                width: 200px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="sound-badge" onclick="toggleSound()">
+        <div class="tooltip">Sound: ON</div>
+        🔊
+    </div>
+    
+    <div class="history-toggle" onclick="toggleHistory()">
+        <div class="tooltip">Calculation History</div>
+        📜
+    </div>
+    
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="tooltip">Toggle Theme</div>
+        🌙
+    </div>
+    
+    <a href="https://github.com" target="_blank" class="github-badge">
+        <div class="tooltip">Hosted on GitHub</div>
+        🐙
+    </a>
+    
+    <div class="history-panel" id="historyPanel">
+        <div class="history-header">
+            <div class="history-title">Calculation History</div>
+            <button class="clear-history" onclick="clearHistory()">Clear</button>
+        </div>
+        <div id="historyList"></div>
+    </div>
+    
+    <div class="calculator">
+        <div class="display">
+            <div class="memory-indicator" id="memoryIndicator"></div>
+            <div class="calculation" id="calculation"></div>
+            <div class="result" id="result">0</div>
+        </div>
+        <div class="buttons">
+            <!-- Memory Functions Row -->
+            <button class="btn btn-memory" onclick="buttonClick('memory', 'mc')" title="Memory Clear">MC</button>
+            <button class="btn btn-memory" onclick="buttonClick('memory', 'mr')" title="Memory Recall">MR</button>
+            <button class="btn btn-memory" onclick="buttonClick('memory', 'm+')" title="Memory Add">M+</button>
+            <button class="btn btn-memory" onclick="buttonClick('memory', 'm-')" title="Memory Subtract">M-</button>
+            <button class="btn btn-percentage" onclick="buttonClick('percentage')" title="Percentage">%</button>
+            
+            <!-- Main Calculator Buttons -->
+            <button class="btn btn-special" onclick="buttonClick('clear')">C</button>
+            <button class="btn btn-special" onclick="buttonClick('delete')">⌫</button>
+            <button class="btn btn-special" onclick="buttonClick('operator', '/')">/</button>
+            <button class="btn btn-operator" onclick="buttonClick('operator', '*')">×</button>
+            
+            <button class="btn btn-number" onclick="buttonClick('number', '7')">7</button>
+            <button class="btn btn-number" onclick="buttonClick('number', '8')">8</button>
+            <button class="btn btn-number" onclick="buttonClick('number', '9')">9</button>
+            <button class="btn btn-operator" onclick="buttonClick('operator', '-')">-</button>
+            
+            <button class="btn btn-number" onclick="buttonClick('number', '4')">4</button>
+            <button class="btn btn-number" onclick="buttonClick('number', '5')">5</button>
+            <button class="btn btn-number" onclick="buttonClick('number', '6')">6</button>
+            <button class="btn btn-operator" onclick="buttonClick('operator', '+')">+</button>
+            
+            <button class="btn btn-number" onclick="buttonClick('number', '1')">1</button>
+            <button class="btn btn-number" onclick="buttonClick('number', '2')">2</button>
+            <button class="btn btn-number" onclick="buttonClick('number', '3')">3</button>
+            <button class="btn btn-operator" onclick="buttonClick('equals')" rowspan="2">=</button>
+            
+            <button class="btn btn-number" onclick="buttonClick('number', '0')">0</button>
+            <button class="btn btn-number" onclick="buttonClick('decimal')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '0';
+        let previousInput = '';
+        let operation = null;
+        let resetInput = false;
+        let isDarkTheme = true;
+        let soundEnabled = true;
+        let memory = 0;
+        let calculationHistory = [];
+        
+        const resultElement = document.getElementById('result');
+        const calculationElement = document.getElementById('calculation');
+        const memoryIndicator = document.getElementById('memoryIndicator');
+        const historyPanel = document.getElementById('historyPanel');
+        const historyList = document.getElementById('historyList');
+        const soundBadge = document.querySelector('.sound-badge');
+        
+        // Sound functions using Web Audio API
+        function playSound(frequency, duration, type = 'sine') {
+            if (!soundEnabled) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            } catch (error) {
+                console.log('Audio not supported:', error);
+            }
+        }
+        
+        function playClickSound() {
+            playSound(800, 0.1, 'sine');
+        }
+        
+        function playNumberSound() {
+            playSound(600, 0.1, 'sine');
+        }
+        
+        function playOperatorSound() {
+            playSound(1000, 0.15, 'sine');
+        }
+        
+        function playEqualsSound() {
+            playSound(1200, 0.2, 'sine');
+        }
+        
+        function playSpecialSound() {
+            playSound(400, 0.1, 'square');
+        }
+        
+        function playMemorySound() {
+            playSound(700, 0.15, 'sine');
+        }
+        
+        function playErrorSound() {
+            playSound(200, 0.3, 'sawtooth');
+        }
+        
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const tooltip = soundBadge.querySelector('.tooltip');
+            
+            if (soundEnabled) {
+                soundBadge.classList.remove('muted');
+                soundBadge.innerHTML = '🔊<div class="tooltip">Sound: ON</div>';
+                playSpecialSound();
+            } else {
+                soundBadge.classList.add('muted');
+                soundBadge.innerHTML = '🔇<div class="tooltip">Sound: OFF</div>';
+            }
+        }
+
+        // Memory functions
+        function updateMemoryIndicator() {
+            memoryIndicator.textContent = memory !== 0 ? 'M' : '';
+        }
+
+        function memoryClear() {
+            memory = 0;
+            updateMemoryIndicator();
+            playMemorySound();
+        }
+
+        function memoryRecall() {
+            if (memory !== 0) {
+                currentInput = memory.toString();
+                resetInput = false;
+                updateDisplay();
+                playMemorySound();
+            }
+        }
+
+        function memoryAdd() {
+            const current = parseFloat(currentInput);
+            if (!isNaN(current)) {
+                memory += current;
+                updateMemoryIndicator();
+                playMemorySound();
+            }
+        }
+
+        function memorySubtract() {
+            const current = parseFloat(currentInput);
+            if (!isNaN(current)) {
+                memory -= current;
+                updateMemoryIndicator();
+                playMemorySound();
+            }
+        }
+
+        // Percentage function
+        function calculatePercentage() {
+            const current = parseFloat(currentInput);
+            if (!isNaN(current)) {
+                currentInput = (current / 100).toString();
+                updateDisplay();
+                playSpecialSound();
+            }
+        }
+
+        // History functions
+        function addToHistory(expression, result) {
+            calculationHistory.unshift({
+                expression: expression,
+                result: result,
+                timestamp: new Date().toLocaleTimeString()
+            });
+            
+            // Keep only last 10 calculations
+            if (calculationHistory.length > 10) {
+                calculationHistory.pop();
+            }
+            
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            historyList.innerHTML = '';
+            
+            if (calculationHistory.length === 0) {
+                historyList.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No calculations yet</div>';
+                return;
+            }
+            
+            calculationHistory.forEach((item, index) => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.innerHTML = `
+                    <div class="history-expression">${item.expression}</div>
+                    <div class="history-result">= ${item.result}</div>
+                    <div style="font-size: 12px; color: #888;">${item.timestamp}</div>
+                `;
+                
+                historyItem.onclick = () => {
+                    currentInput = item.result;
+                    updateDisplay();
+                    playSpecialSound();
+                };
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        function clearHistory() {
+            calculationHistory = [];
+            updateHistoryDisplay();
+            playSpecialSound();
+        }
+
+        function toggleHistory() {
+            if (historyPanel.style.display === 'block') {
+                historyPanel.style.display = 'none';
+            } else {
+                historyPanel.style.display = 'block';
+                updateHistoryDisplay();
+            }
+            playSpecialSound();
+        }
+
+        // Close history when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.history-panel') && !event.target.closest('.history-toggle')) {
+                historyPanel.style.display = 'none';
+            }
+        });
+        
+        // Button animation function
+        function animateButton(button, animationClass) {
+            button.classList.add(animationClass);
+            setTimeout(() => {
+                button.classList.remove(animationClass);
+            }, 300);
+        }
+        
+        // Enhanced button click handler
+        function buttonClick(type, value = null) {
+            const button = event.currentTarget;
+            animateButton(button, 'btn-press');
+            
+            switch (type) {
+                case 'number':
+                    playNumberSound();
+                    appendNumber(value);
+                    break;
+                case 'operator':
+                    playOperatorSound();
+                    appendOperator(value);
+                    break;
+                case 'equals':
+                    playEqualsSound();
+                    const expression = previousInput + ' ' + (operation || '') + ' ' + currentInput;
+                    calculate();
+                    if (currentInput !== 'Error') {
+                        addToHistory(expression, currentInput);
+                    }
+                    break;
+                case 'decimal':
+                    playClickSound();
+                    appendDecimal();
+                    break;
+                case 'clear':
+                    playSpecialSound();
+                    clearAll();
+                    break;
+                case 'delete':
+                    playSpecialSound();
+                    deleteLast();
+                    break;
+                case 'memory':
+                    playMemorySound();
+                    handleMemory(value);
+                    break;
+                case 'percentage':
+                    playSpecialSound();
+                    calculatePercentage();
+                    break;
+            }
+            
+            animateDisplay();
+        }
+
+        function handleMemory(operation) {
+            switch (operation) {
+                case 'mc': memoryClear(); break;
+                case 'mr': memoryRecall(); break;
+                case 'm+': memoryAdd(); break;
+                case 'm-': memorySubtract(); break;
+            }
+        }
+        
+        function animateDisplay() {
+            const display = document.querySelector('.display');
+            display.classList.add('display-update');
+            setTimeout(() => {
+                display.classList.remove('display-update');
+            }, 200);
+        }
+        
+        function updateDisplay() {
+            resultElement.textContent = currentInput;
+            calculationElement.textContent = previousInput + ' ' + (operation || '');
+        }
+        
+        function appendNumber(number) {
+            if (currentInput === '0' || resetInput) {
+                currentInput = number;
+                resetInput = false;
+            } else {
+                currentInput += number;
+            }
+            updateDisplay();
+        }
+        
+        function appendDecimal() {
+            if (resetInput) {
+                currentInput = '0.';
+                resetInput = false;
+            } else if (!currentInput.includes('.')) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+        
+        function appendOperator(op) {
+            if (operation !== null && !resetInput) {
+                calculate();
+            }
+            
+            operation = op;
+            previousInput = currentInput;
+            resetInput = true;
+            updateDisplay();
+        }
+        
+        function calculate() {
+            if (operation === null || resetInput) return;
+            
+            let computation;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            
+            if (isNaN(prev) || isNaN(current)) return;
+            
+            switch (operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '-':
+                    computation = prev - current;
+                    break;
+                case '*':
+                    computation = prev * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        computation = 'Error';
+                        playErrorSound();
+                        animateButton(resultElement, 'btn-glow');
+                    } else {
+                        computation = prev / current;
+                    }
+                    break;
+                default:
+                    return;
+            }
+            
+            currentInput = computation.toString();
+            operation = null;
+            previousInput = '';
+            resetInput = true;
+            updateDisplay();
+        }
+        
+        function clearAll() {
+            currentInput = '0';
+            previousInput = '';
+            operation = null;
+            updateDisplay();
+        }
+        
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        // Theme functionality
+        function toggleTheme() {
+            playSpecialSound();
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (isDarkTheme) {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeToggle.innerHTML = '☀️<div class="tooltip">Toggle Theme</div>';
+                isDarkTheme = false;
+            } else {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeToggle.innerHTML = '🌙<div class="tooltip">Toggle Theme</div>';
+                isDarkTheme = true;
+            }
+        }
+        
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                buttonClick('number', key);
+            } else if (key === '.') {
+                buttonClick('decimal');
+            } else if (key === '+' || key === '-' || key === '*') {
+                buttonClick('operator', key);
+            } else if (key === '/') {
+                event.preventDefault();
+                buttonClick('operator', '/');
+            } else if (key === 'Enter' || key === '=') {
+                event.preventDefault();
+                buttonClick('equals');
+            } else if (key === 'Escape' || key === 'c' || key === 'C') {
+                buttonClick('clear');
+            } else if (key === 'Backspace') {
+                event.preventDefault();
+                buttonClick('delete');
+            } else if (key === 't' || key === 'T') {
+                event.preventDefault();
+                toggleTheme();
+            } else if (key === 's' || key === 'S') {
+                event.preventDefault();
+                toggleSound();
+            } else if (key === 'h' || key === 'H') {
+                event.preventDefault();
+                toggleHistory();
+            } else if (key === '%') {
+                event.preventDefault();
+                buttonClick('percentage');
+            } else if (key === 'm' || key === 'M') {
+                // Memory shortcuts
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    if (event.shiftKey) {
+                        buttonClick('memory', 'm-');
+                    } else {
+                        buttonClick('memory', 'm+');
+                    }
+                }
+            }
+        });
+        
+        // Initialize display and memory indicator
+        updateDisplay();
+        updateMemoryIndicator();
+    </script>
+</body>
+</html>
